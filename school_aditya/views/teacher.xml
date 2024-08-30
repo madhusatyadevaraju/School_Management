@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--creating a tree view-->
+    <record id="view_school_teacher_tree" model="ir.ui.view">
+        <field name="name">school.teacher.tree</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <tree string="teacher">
+                <field name="name"/>
+                <field name="address"/>
+
+                <field name="mobile"/>
+
+                <field name="date_of_birth" optional="show"/><!--optional means hiding fields or shows as required-->
+                <field name="gender" optional="hide"/>
+                <field name="is_teacher"/>
+
+
+            </tree>
+        </field>
+    </record>
+    <!--creating a form view -->
+    <record id="view_school_teacher_form" model="ir.ui.view">
+        <field name="name">school.teacher.form</field>
+        <field name="model">school.teacher</field>
+        <field name="arch" type="xml">
+            <form string="teacher">
+                <sheet>  <!-- sheet is used to arrange all fields in one box-->
+                    <group>
+                        <field name="name"/>
+                        <field name="address"/>
+
+                        <field name="mobile"/>
+
+                        <field name="date_of_birth"
+                               optional="show"/><!--optional means hiding fields or shows as required-->
+                        <field name="gender" optional="hide"/>
+                        <field name="is_teacher"/>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_school_teacher" model="ir.actions.act_window">
+        <field name="name">teacher</field>
+        <field name="res_model">school.teacher</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create a new patient
+            </p>
+        </field>
+    </record>
+
+</odoo>

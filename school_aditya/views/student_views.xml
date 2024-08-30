@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--creating a tree view-->
+    <record id="view_school_student_tree" model="ir.ui.view">
+        <field name="name">school.student.tree</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <tree string="student_tree">
+                <field name="name"/>
+                <field name="address"/>
+                <field name="gaurdien_name"/>
+                <field name="mobile"/>
+
+                <field name="date_of_birth" optional="show"/><!--optional means hiding fields or shows as required-->
+                <field name="gender" optional="hide"/>
+                <field name="joining_of_date" optional="hide"/>
+                <field name="teacher"/>
+                <field name="teacher_ids"/>
+                <field name="student_fees"/>
+
+
+            </tree>
+        </field>
+    </record>
+    <!--creating a form view -->
+    <record id="view_school_student_form" model="ir.ui.view">
+        <field name="name">school.student.form</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <form string="student">
+                <header>
+
+                    <button name="action_confirm" string="Confirm" type="object"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+
+                </header>
+                <sheet>  <!-- sheet is used to arrange all fields in one box-->
+                    <group>
+                        <field name="name"/>
+                        <field name="address"/>
+                        <field name="gaurdien_name"/>
+                        <field name="mobile"/>
+
+                        <field name="date_of_birth"
+                               optional="show"/><!--optional means hiding fields or shows as required-->
+                        <field name="gender" optional="hide"/>
+                        <field name="joining_of_date" optional="hide"/>
+                        <field name="teacher"/>
+                        <field name="teacher_ids" widget="many2many_tags"/>
+                        <field name="student_fees"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_school_student" model="ir.actions.act_window">
+        <field name="name">students</field>
+        <field name="res_model">school.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create a new patient
+            </p>
+        </field>
+    </record>
+
+</odoo>

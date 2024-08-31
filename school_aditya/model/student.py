@@ -1,3 +1,5 @@
+
+
 from odoo import api, fields, models
 from datetime import datetime
 
@@ -27,7 +29,8 @@ class SchoolStudent(models.Model):
     age = fields.Integer(
         string='Age',
         compute='_compute_age',
-        store=True  # Optionally, store the computed value in the database
+        store=True
+        # Optionally, store the computed value in the database
     )
 
     @api.depends('date_of_birth')

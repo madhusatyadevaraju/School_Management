@@ -25,7 +25,14 @@
               parent="menu_school_root"
               action="action_fees_structure"
 
+
      />
+      <menuitem id="menu_query"
+              name="Admission"
+              parent="menu_school_root"
+              action="action_school_query"
+     />
+
 
 
 </odoo>

@@ -20,6 +20,10 @@
         <field name="model">fees.structure</field>
         <field name="arch" type="xml">
             <form string="fees_structure">
+                <header>
+                       <button name="action_confirm" string="Paid" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
 
                 <sheet>
                 <group>

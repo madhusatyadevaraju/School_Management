@@ -30,26 +30,38 @@
             <form string="student">
                 <header>
 
-                    <button name="action_confirm" string="Confirm" type="object"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
 
                 </header>
                 <sheet>  <!-- sheet is used to arrange all fields in one box-->
                     <group>
-                        <field name="name"/>
-                        <field name="address"/>
-                        <field name="gaurdien_name"/>
-                        <field name="mobile"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="address"/>
+                            <field name="gaurdien_name"/>
+                            <field name="mobile"/>
 
-                        <field name="date_of_birth"
-                               optional="show"/><!--optional means hiding fields or shows as required-->
-                        <field name="gender" optional="hide"/>
-                        <field name="joining_of_date" optional="hide"/>
-                        <field name="teacher"/>
-                        <field name="teacher_ids" widget="many2many_tags"/>
-                        <field name="student_fees"/>
-                        <field name="consultant_no"/>
-                        <field name="age"/>
+
+                            <field name="date_of_birth"
+                                   optional="show"/><!--optional means hiding fields or shows as required-->
+                            <field name="age"/>
+                            <field name="gender" optional="hide"/>
+                        </group>
+                        <group>
+                            <field name="joining_of_date" optional="hide"/>
+                            <field name="teacher"/>
+                            <field name="teacher_ids" widget="many2many_tags"/>
+                            <field name="consultant_no"/>
+                        </group>
+
+                        <notebook>
+                            <page string="Fees Structure">
+                                <field name="student_fees">
+
+                                </field>
+                            </page>
+                        </notebook>
 
                     </group>
 
@@ -69,5 +81,6 @@
             </p>
         </field>
     </record>
+
 
 </odoo>

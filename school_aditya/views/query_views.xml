@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Tree View -->
+    <record id="view_school_query_tree" model="ir.ui.view">
+        <field name="name">school.query.tree</field>
+        <field name="model">school.query</field>
+        <field name="arch" type="xml">
+            <tree string="School Queries">
+                <field name="name"/>
+                <field name="guardian_name"/>
+                <field name="parent_mobile"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_school_query_form" model="ir.ui.view">
+        <field name="name">school.query.form</field>
+        <field name="model">school.query</field>
+        <field name="arch" type="xml">
+            <form string="School Query">
+                 <header>
+                    <button name="action_create_student" type="object" string="Admit" class="btn-primary"/>
+                     <field name="status" widget="statusbar"/>
+                 </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="guardian_name"/>
+                        <field name="parent_mobile"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_school_query" model="ir.actions.act_window">
+        <field name="name">admission</field>
+        <field name="res_model">school.query</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

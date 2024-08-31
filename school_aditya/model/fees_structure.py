@@ -7,3 +7,4 @@ class FeesStructure(models.Model):
     fees_amount = fields.Float(string='Fees Amount')
     due_date = fields.Date(string='Due Date')
     student_id=fields.Many2one(comodel_name="school.student",string="Student")
+

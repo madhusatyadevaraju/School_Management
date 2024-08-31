@@ -20,11 +20,14 @@
         <field name="model">fees.structure</field>
         <field name="arch" type="xml">
             <form string="fees_structure">
+
+                <sheet>
                 <group>
                     <field name="student_id"/>
                     <field name="fees_amount"/>
                     <field name="due_date"/>
                 </group>
+                </sheet>
 
             </form>
         </field>

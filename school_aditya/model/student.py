@@ -25,7 +25,7 @@ class SchoolStudent(models.Model):
                              string="Selected",default="not selected")
     student_fees=fields.One2many(comodel_name="fees.structure", inverse_name="student_id",
                                  string="Fees Structure")
-    consultant_no=fields.Char(String="Teacher No")
+    consultant_no=fields.Char(string="Teacher No")
 
     age = fields.Integer(
         string='Age',
@@ -33,6 +33,8 @@ class SchoolStudent(models.Model):
         store=True
         # Optionally, store the computed value in the database
     )
+    student_status=fields.Char(string="Status")
+
 
     @api.depends('date_of_birth')
     def _compute_age(self):
@@ -46,10 +48,6 @@ class SchoolStudent(models.Model):
             else:
                 record.age = 0
 
-
-
-
-
     def action_confirm(self):
         for rec in self:
             rec.state="selected"
@@ -58,6 +56,9 @@ class SchoolStudent(models.Model):
     def _onchange_teacher(self):
         if self.teacher:
             self.consultant_no=self.teacher.mobile
+
+
+
 
 
 

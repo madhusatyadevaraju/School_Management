@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_invoice_record_form">
+        <field name="name">Account Invoice New</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='l10n_in_state_id']" position="before">
+                    <field name="parent_name" string="Parent Name"/>
+                    <field name="parent_mobile" string="Parent No"/>
+
+            </xpath>
+
+        </field>
+    </record>
+
+
+<record model="ir.ui.view" id="account_invoice_form">
+        <field name="name">Account Invoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//field[@name='product_id']" position="after" >
+                 <field name="fees_id"/>
+             </xpath>
+        </field>
+    </record>
+</odoo>

@@ -10,6 +10,8 @@
                 <field name="name"/>
                 <field name="guardian_name"/>
                 <field name="parent_mobile"/>
+                <field name="status"/>
+                <field name="joining_of_date"/>
             </tree>
         </field>
     </record>
@@ -21,7 +23,7 @@
         <field name="arch" type="xml">
             <form string="School Query">
                  <header>
-                    <button name="action_create_student" type="object" string="Admit" class="btn-primary"/>
+                    <button name="action_create_student" type="object" string="Admit" invisible="status!='draft'" class="oe_highlight"/>
                      <field name="status" widget="statusbar"/>
                  </header>
                 <sheet>
@@ -29,6 +31,7 @@
                         <field name="name"/>
                         <field name="guardian_name"/>
                         <field name="parent_mobile"/>
+                        <field name="joining_of_date"/>
                     </group>
                 </sheet>
             </form>

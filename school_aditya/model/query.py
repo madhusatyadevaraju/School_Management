@@ -13,9 +13,10 @@ class SchoolAdmission(models.Model):
     guardian_name = fields.Char(string="Guardian Name")
     parent_mobile=fields.Char(String="Mobile")
     status=fields.Selection([('draft','Draft'),('admit','Admit')],default='draft')
+    joining_of_date=fields.Date(string="Joining Date")
 
     def action_create_student(self):
-        self.status='admit'
+
         student_id=self.env['school.student'].search([('mobile','=',self.parent_mobile)])
 
         print("StudentIds",student_id)
@@ -24,13 +25,17 @@ class SchoolAdmission(models.Model):
         if student_id:
             raise ValidationError("There is a student with the same phone number !!!!")
         student = self.env['school.student']
+        self.status = 'admit'
+        today = datetime.today()
         for record in self:
             # Create a new student record in the school.student model
             student.create({
                 'name': record.name,
                 # Assuming class maps to standard
                 'gaurdien_name': record.guardian_name,
-                'mobile': record.parent_mobile
+                'mobile': record.parent_mobile,
+                'student_status':record.status,
+                "joining_of_date" :today
 
             })
 

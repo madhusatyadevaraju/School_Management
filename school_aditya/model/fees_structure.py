@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class FeesStructure(models.Model):
     _name = 'fees.structure'
+    _rec_name = "fees_amount"
 
 
     fees_amount = fields.Float(string='Fees Amount')

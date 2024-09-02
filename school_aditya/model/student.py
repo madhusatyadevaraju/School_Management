@@ -6,9 +6,10 @@ from datetime import datetime
 
 class SchoolStudent(models.Model):
     _name = "school.student"
+    _inherit=["mail.thread"]
     _description = "Student Master"
 
-    name=fields.Char(string="Name")
+    name=fields.Char(string="Name" , tracking=True)
     address=fields.Char(string="Address")
     gaurdien_name=fields.Char(string="Guardien Name")
     mobile=fields.Char(string="Mobile")

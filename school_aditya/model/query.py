@@ -2,6 +2,7 @@ from odoo import api, fields, models
 from datetime import datetime
 
 from odoo.addons.test_new_api.tests.test_new_fields import select
+from odoo.exceptions import ValidationError
 
 
 class SchoolAdmission(models.Model):
@@ -15,6 +16,13 @@ class SchoolAdmission(models.Model):
 
     def action_create_student(self):
         self.status='admit'
+        student_id=self.env['school.student'].search([('mobile','=',self.parent_mobile)])
+
+        print("StudentIds",student_id)
+        for student in student_id:
+            print(student.name,"Student Names")
+        if student_id:
+            raise ValidationError("There is a student with the same phone number !!!!")
         student = self.env['school.student']
         for record in self:
             # Create a new student record in the school.student model

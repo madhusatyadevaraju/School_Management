@@ -54,18 +54,19 @@
                             <field name="teacher_ids" widget="many2many_tags"/>
                             <field name="consultant_no"/>
                         </group>
-
                         <notebook>
                             <page string="Fees Structure">
                                 <field name="student_fees">
-
                                 </field>
                             </page>
                         </notebook>
-
                     </group>
-
                 </sheet>
+                <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user" options="{'post_refresh': 'recipients'}"/>
+                        <field name="message_ids"/>
+                    </div>
+
             </form>
         </field>
     </record>

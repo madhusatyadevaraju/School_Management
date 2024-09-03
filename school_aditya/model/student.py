@@ -1,6 +1,6 @@
+from lib2to3.fixes.fix_input import context
 
-
-from odoo import api, fields, models
+from odoo import api, fields, models,_
 from datetime import datetime
 
 
@@ -8,6 +8,7 @@ class SchoolStudent(models.Model):
     _name = "school.student"
     _inherit=["mail.thread"]
     _description = "Student Master"
+    _rec_name = 'name'
 
     name=fields.Char(string="Name" , tracking=True)
     address=fields.Char(string="Address")
@@ -52,10 +53,32 @@ class SchoolStudent(models.Model):
         for rec in self:
             rec.state="selected"
 
+
+
     @api.onchange("teacher")
     def _onchange_teacher(self):
         if self.teacher:
             self.consultant_no=self.teacher.mobile
+
+
+    def action_suggestion(self):
+        return {
+            'name': _('Suggestion'),
+            'type': 'ir.actions.act_window',
+            'res_model':'student.suggestion',
+            'view_mode': 'form',
+            'target' :'new',
+            'context' :{
+                'default_student_name':self.name
+            }
+
+        }
+
+
+
+
+
+
 
 
 

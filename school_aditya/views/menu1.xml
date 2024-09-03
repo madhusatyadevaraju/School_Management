@@ -32,7 +32,9 @@
               parent="menu_school_root"
               action="action_school_query"
      />
-
-
-
+     <menuitem id="menu_student_suggestions"
+              name="Suggestions"
+              parent="menu_school_root"
+              action="action_student_suggestions"
+     />
 </odoo>

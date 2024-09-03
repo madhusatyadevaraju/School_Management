@@ -10,6 +10,7 @@
                 <field name="student_id"/>
                 <field name="fees_amount"/>
                 <field name="due_date"/>
+                <field name="status"/>
 
             </tree>
         </field>
@@ -22,14 +23,16 @@
             <form string="fees_structure">
                 <header>
                        <button name="action_confirm" string="Paid" type="object" class="oe_highlight"/>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
 
                 <sheet>
                 <group>
                     <field name="student_id"/>
+                    <field name="fee_type"/>
                     <field name="fees_amount"/>
                     <field name="due_date"/>
+
                 </group>
                 </sheet>
 

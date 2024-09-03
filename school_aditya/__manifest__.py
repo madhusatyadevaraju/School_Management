@@ -12,6 +12,8 @@
         "views/query_views.xml",
         "views/sale_view.xml",
         "views/invoicing_view.xml",
+        "views/student_suggestion_views.xml",
         "views/menu1.xml"
+
     ]
 }

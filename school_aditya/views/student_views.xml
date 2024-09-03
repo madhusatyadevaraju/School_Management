@@ -28,6 +28,7 @@
                 <header>
 
                     <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state!='not selected'"/>
+                     <button name="action_suggestion" string="Suggestion" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
 
                 </header>
@@ -84,6 +85,4 @@
             </p>
         </field>
     </record>
-
-
 </odoo>

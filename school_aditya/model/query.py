@@ -13,7 +13,7 @@ class SchoolAdmission(models.Model):
     guardian_name = fields.Char(string="Guardian Name")
     parent_mobile=fields.Char(String="Mobile")
     status=fields.Selection([('draft','Draft'),('admit','Admit')],default='draft')
-    joining_of_date=fields.Date(string="Joining Date")
+    joining_of_date=fields.Date(string="Admission Date")
 
     def action_create_student(self):
 

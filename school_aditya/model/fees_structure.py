@@ -8,10 +8,11 @@ class FeesStructure(models.Model):
 
     fees_amount = fields.Float(string='Fees Amount')
     due_date = fields.Date(string='Due Date')
+    fee_type=fields.Selection([('1','Tuition Fee'),('2','Admission Fee'),('3','Lab Fee'),('4','Books Fee')],string="Fee Type")
     student_id=fields.Many2one(comodel_name="school.student",string="Student")
-    state=fields.Selection([("unpaid","Unpaid"),("paid","Paid")], default="unpaid")
+    status=fields.Selection([("unpaid","Unpaid"),("paid","Paid")], default="unpaid")
 
     def action_confirm(self):
         for rec in self:
-            rec.state = "paid"
+            rec.status = "paid"
 

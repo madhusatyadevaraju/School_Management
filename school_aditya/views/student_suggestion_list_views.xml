@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    creating a tree view-->
+    <record id="view_school_student_suggestion_tree" model="ir.ui.view">
+        <field name="name">school.student.suggestion.form</field>
+        <field name="model">school.student.suggestion</field>
+        <field name="arch" type="xml">
+            <tree string="School Suggestion">
+               <field name="student_name"/>
+                <field name="student_class"/>
+                <field name="message"/>
+            </tree>
+        </field>
+    </record>
+    <!--creating a form view -->
+    <record id="view_school_student_suggestion_form" model="ir.ui.view">
+        <field name="name">school.student.suggestion.form</field>
+        <field name="model">school.student.suggestion</field>
+        <field name="arch" type="xml">
+            <form string="School Suggestion">
+                <sheet>
+                    <group>
+                 <field name="student_name"/>
+                <field name="student_class"/>
+                <field name="message"/>
+                    </group>
+                 <!-- sheet is used to arrange all fields in one box-->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_school_student_suggestion_list" model="ir.actions.act_window">
+        <field name="name">School Student Suggestion List</field>
+        <field name="res_model">school.student.suggestion</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                create a student suggestion lists in suggestion menu
+            </p>
+        </field>
+    </record>
+
+</odoo>

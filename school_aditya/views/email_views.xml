@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Email Template Definition -->
+        <record id="email_template_school_student" model="mail.template">
+            <field name="name">Student Welcome Email</field>
+            <field name="email_from">${(user.email or 'no-reply@example.com')}</field>
+            <field name="subject">Welcome to Our School, ${object.name}!</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>Dear ${object.name},</p>
+                <p>Welcome to our school! We are excited to have you as a part of our community.</p>
+                <p>Here are some details about your registration:</p>
+                <ul>
+                    <li><strong>Name:</strong> ${object.name}</li>
+                    <li><strong>Email:</strong> ${object.email}</li>
+                    <li><strong>Course:</strong> ${object.course_id.name}</li>
+                </ul>
+                <p>If you have any questions, feel free to reach out to us.</p>
+                <p>Best regards,<br/>The School Team</p>
+                ]]>
+            </field>
+            <field name="model_id" ref="model_school_student"/>
+            <field name="lang">en_US</field>
+        </record>
+    </data>
+</odoo>
+

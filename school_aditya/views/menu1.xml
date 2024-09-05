@@ -24,17 +24,16 @@
               name="Fees"
               parent="menu_school_root"
               action="action_fees_structure"
-
-
-     />
+    />
       <menuitem id="menu_query"
               name="Admission"
               parent="menu_school_root"
               action="action_school_query"
      />
-     <menuitem id="menu_student_suggestions"
+    <menuitem id="menu_student-suggestion_list"
               name="Suggestions"
               parent="menu_school_root"
-              action="action_student_suggestions"
+              action="action_school_student_suggestion_list"
+
      />
 </odoo>

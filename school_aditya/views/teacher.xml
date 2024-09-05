@@ -25,20 +25,30 @@
         <field name="model">school.teacher</field>
         <field name="arch" type="xml">
             <form string="teacher">
+                <header>
+                 <button name="action_teacher" string="Confirm Teacher"
+                            type="object" class="oe_highlight"/>
+                <field name="status" widget="statusbar" options="{'clickable': '1'}" />
+                </header>
                 <sheet>  <!-- sheet is used to arrange all fields in one box-->
                     <group>
                         <field name="name"/>
                         <field name="address"/>
-
                         <field name="mobile"/>
-
                         <field name="date_of_birth"
                                optional="show"/><!--optional means hiding fields or shows as required-->
                         <field name="gender" optional="hide"/>
                         <field name="is_teacher"/>
-
                     </group>
+                    <notebook>
+                            <page string="Additional">
+                                <group>
+                                <field name="teacher_user_id" domain="[('name', '=', name)]"/>
+                                </group>
+                            </page>
+                    </notebook>
                 </sheet>
+
             </form>
         </field>
     </record>

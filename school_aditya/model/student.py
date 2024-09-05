@@ -1,3 +1,4 @@
+from email.policy import default
 from lib2to3.fixes.fix_input import context
 
 from odoo import api, fields, models,_
@@ -10,7 +11,8 @@ class SchoolStudent(models.Model):
     _description = "Student Master"
     _rec_name = 'name'
 
-    name=fields.Char(string="Name" , tracking=True)
+    name=fields.Char(string="Name" , tracking=True ,required=True)
+    email=fields.Char(string="Email")
     address=fields.Char(string="Address")
     gaurdien_name=fields.Char(string="Guardien Name")
     mobile=fields.Char(string="Mobile")
@@ -27,6 +29,8 @@ class SchoolStudent(models.Model):
     student_fees=fields.One2many(comodel_name="fees.structure", inverse_name="student_id",
                                  string="Fees Structure")
     consultant_no=fields.Char(string="Teacher No")
+    user_id = fields.Many2one('res.users' , string='Login User')
+
 
     age = fields.Integer(
         string='Age',
@@ -35,7 +39,12 @@ class SchoolStudent(models.Model):
         # Optionally, store the computed value in the database
     )
     student_status=fields.Char(string="Status")
+    suggestion_count=fields.Integer(string="Suggestion",compute='_suggestion_count')
 
+    def _suggestion_count(self):
+        self.suggestion_count=self.env['school.student.suggestion'].search_count(
+            domain=[('student_name','=',self.name)]
+        )
 
     @api.depends('date_of_birth')
     def _compute_age(self):
@@ -52,8 +61,14 @@ class SchoolStudent(models.Model):
     def action_confirm(self):
         for rec in self:
             rec.state="selected"
-
-
+            user_vals = {
+                'name': self.name,
+                'login': self.name,
+                'email': self.email,
+                'password': self.name,
+                'groups_id': [(6, 0, [self.env.ref('school_aditya.group_school_student').id])]
+            }
+            self.env['res.users'].create(user_vals)
 
     @api.onchange("teacher")
     def _onchange_teacher(self):
@@ -68,11 +83,26 @@ class SchoolStudent(models.Model):
             'res_model':'student.suggestion',
             'view_mode': 'form',
             'target' :'new',
-            'context' :{
-                'default_student_name':self.name
-            }
+            'context' :{'default_student_name' :self.name}
 
         }
+
+    def action_open_suggestion_wizard(self):
+        return {
+            'name': _('Suggestion'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'school.student.suggestion',
+            'view_mode': 'tree',
+            'domain': [('student_name', '=', self.name)]
+
+
+         }
+        #for creating a users
+    def send_welcome_email(self):
+        template_id = self.env.ref('school_aditya.email_template_school_student').id
+        for student in self:
+            if student.email:
+                self.env['mail.template'].browse(template_id).send_mail(student.id, force_send=True)
 
 
 

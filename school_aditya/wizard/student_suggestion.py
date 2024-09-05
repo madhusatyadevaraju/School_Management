@@ -10,7 +10,7 @@ class StudentSuggestion(models.TransientModel):
     _rec_name = "student_name"
 
     # student_id = fields.Many2one('school.student', string="Student Name")
-    student_name=fields.Char(string="Student Name", readonly=True)
+    student_name=fields.Char(string="Student Name")
     student_class = fields.Selection([('first', "First"),
                                       ('second', 'Second'),
                                       ('third', 'Third'),
@@ -19,12 +19,12 @@ class StudentSuggestion(models.TransientModel):
     suggestion = fields.Text(string="Suggestion")
 
     def action_save(self):
-        self.ensure_one()
-        return {'type': "ir.actions.act_window_close"}
+        self.env['school.student.suggestion'].create({
+            'student_name' : self.student_name,
+            'student_class': self.student_class,
+            'message' :self.suggestion
+        })
 
-    def action_cancel(self):
-        self.ensure_one()
-        return {'type': "ir.actions.act_window_close"}
 
     @api.model
     def default_get(self, fields_list):
@@ -42,7 +42,6 @@ class StudentSuggestion(models.TransientModel):
             res.update({
                 'student_name': default_student_name,  # Correct the field name to match your model
             })
-
         return res
 
 

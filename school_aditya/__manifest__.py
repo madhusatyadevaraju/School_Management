@@ -7,7 +7,9 @@
     "data" : [
         "security/ir.model.access.csv",
         "security/security.xml",
-
+        "data/email_templets_views.xml",
+        "report/student_model_report.xml",
+        "report/student_model_report_templete.xml",
         "views/student_views.xml",
         "views/teacher.xml",
         "views/fees_structure_views.xml",
@@ -16,7 +18,7 @@
         "views/invoicing_view.xml",
         "wizard/student_suggestion_wizard_views.xml",
          "views/student_suggestion_list_views.xml",
-        "views/email_views.xml",
+
         "views/menu1.xml"
 
     ]

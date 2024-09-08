@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Define the email template -->
+        <record id="email_template_student_guardian" model="mail.template">
+            <field name="name">Student Mail</field>
+            <field name="model_id" ref="school_aditya.model_school_student"/>
+            <field name="email_from">madhusatyadevarajupaila@gmail.com</field>
+            <field name="email_to">${object.email}</field>
+            <field name="subject">Student Information</field>
+            <field name="description">Send to Students</field>
+            <field name="body_html">
+                <![CDATA[
+                    <p>Dear ${object.gaurdien_name},</p>
+
+                <p>We hope this email finds you well. Below are the details for the student ${object.name}:</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
+                    <tr>
+                        <td><strong>Name:</strong></td>
+                        <td>${object.name}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mobile:</strong></td>
+                        <td>${object.mobile}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Address:</strong></td>
+                        <td>${object.address}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Guardian Name:</strong></td>
+                        <td>${object.gaurdian_name}</td>
+                    </tr>
+
+                </table>
+
+                <p>Thank you for your attention.</p>
+                <p>Best regards,</p>
+                <p>Aditya Educational Institutions</p>
+                <p>Contact: aditya@aditya.in</p>
+
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,6 +1,7 @@
 from odoo import api, fields, models
 
 
+
 class SchoolPatient(models.Model):
     _name = "school.teacher"
     _description = "Teacher Master"
@@ -21,10 +22,11 @@ class SchoolPatient(models.Model):
         user_vals = {
             'name': self.name,
             'login': self.name,
-            'email': self.name,
+            'email': self.name+'@gmail.com',
             'password': self.name,
             'groups_id': [(6, 0, [self.env.ref('school_aditya.group_school_teachers').id])]
 
         }
-
-        self.env['res.users'].create(user_vals)
+        user=self.env['res.users'].create(user_vals)
+        for record in self:
+            record.teacher_user_id = user.id

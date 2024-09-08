@@ -8,40 +8,43 @@
     <!-- Create a student group -->
     <record id="group_school_student" model="res.groups">
         <field name="name">Student</field>
-        <field name="category_id" ref="school_aditya.module_category_school"/>
-        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-        <field name="comment">This user will have access to students only.</field>
+        <field name="category_id" ref="module_category_school"/>
     </record>
 
     <!-- Create a teacher group -->
     <record id="group_school_teachers" model="res.groups">
         <field name="name">Teacher</field>
-        <field name="category_id" ref="school_aditya.module_category_school"/>
-        <field name="implied_ids" eval="[(4, ref('school_aditya.group_school_student'))]"/>
-        <field name="comment">This user will have access to student details and fees structure.</field>
+        <field name="category_id" ref="module_category_school"/>
     </record>
 
     <!-- Create a management group -->
     <record id="group_school_management" model="res.groups">
         <field name="name">Management</field>
-        <field name="category_id" ref="school_aditya.module_category_school"/>
-        <field name="implied_ids" eval="[(4, ref('school_aditya.group_school_teachers'))]"/>
-        <field name="comment">This user will have all access rights.</field>
+        <field name="category_id" ref="module_category_school"/>
     </record>
 
-     Record rule for students viewing their own records
-    <record id="school_students_view_own_records_rule" model="ir.rule">
-        <field name="name">Students: View own records</field>
+<!--     Record rule for students viewing their own records-->
+    <record id="school_students_records_rule" model="ir.rule">
+        <field name="name">Students</field>
         <field name="model_id" ref="model_school_student"/> <!-- Use the actual ID of the model -->
         <field name="domain_force">[('user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('school_aditya.group_school_student'))]"/> <!-- Changed 'groups' to 'groups_id' -->
+        <field name="groups" eval="[(4, ref('group_school_student'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval=""/><!-- Changed 'groups' to 'groups_id' -->
     </record>
 
     <!-- Record rule for teachers viewing their own records -->
-    <record id="school_teachers_view_own_records_rule" model="ir.rule">
-        <field name="name">Teachers: View own records</field>
+    <record id="school_teachers_records_rule" model="ir.rule">
+        <field name="name">Teachers</field>
         <field name="model_id" ref="model_school_teacher"/> <!-- Use the actual ID of the model -->
         <field name="domain_force">[('teacher_user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('school_aditya.group_school_teachers'))]"/> <!-- Changed 'groups' to 'groups_id' -->
+        <field name="groups" eval="[(4, ref('group_school_teachers'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/><!-- Changed 'groups' to 'groups_id' -->
     </record>
+
 </odoo>

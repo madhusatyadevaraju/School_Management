@@ -31,7 +31,7 @@
                      <button name="action_suggestion" string="Suggestion" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
 
-                <button name="send_welcome_email" type="object" string="Send Welcome Email" class="oe_highlight"/>
+                <button name="action_send_email" type="object" string="Send Email" class="oe_highlight"/>
 
                 </header>
                 <sheet>  <!-- sheet is used to arrange all fields in one box-->
@@ -69,7 +69,7 @@
                                  <group>
                                 <field name="consultant_no"/>
                                       <field name="student_status"/>
-                                     <field name="user_id" domain="[('name', '=', name)]"/>
+                                     <field name="user_id" domain="[('name', '=', name)]" readonly="1"/>
                                  </group>
                             </page>
                         </notebook>

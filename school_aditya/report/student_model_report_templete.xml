@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report_school_student_management">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <h1 style="color:red">
+                                <i>Student Details</i>
+                            </h1>
+
+                            <p>Student Name:
+                                <span t-field="doc.name" style="margin-left: 10px;"/>
+                            </p>
+                            <p>Student Mobile:
+                                <span t-field="doc.mobile" style="margin-left: 10px;"/>
+                            </p>
+                            <p>Parent Name:
+                                <span t-field="doc.gaurdien_name" style="margin-left: 10px;"/>
+                            </p>
+                        </div>
+                    </t>
+
+                   <div style="margin-bottom:80px;"/>
+                    <!-- Displaying Fees Structure -->
+                    <div style="margin-bottom:80px;">
+                        <h2>Student Fees Details</h2>
+                        <table border="1" cellpadding="5" cellspacing="0"
+                               style="border-collapse: collapse; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1px solid black; padding: 8px;">Fee Type</th>
+                                    <th style="border: 1px solid black; padding: 8px;">Amount</th>
+                                    <th style="border: 1px solid black; padding: 8px;">Due Date</th>
+                                    <th style="border: 1px solid black; padding: 8px;">Fee Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.student_fees" t-as="fee">
+                                    <tr>
+                                        <td style="border: 1px solid black; padding: 8px;">
+                                            <span t-esc="fee.fee_type"/>
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 8px;">
+                                            <span t-esc="fee.fees_amount"/>
+                                        </td>
+                                        <td style="border: 1px solid black; padding: 8px;">
+                                            <span t-esc="fee.due_date"/>
+                                        </td>
+                                         <td style="border: 1px solid black; padding: 8px;">
+                                            <span t-esc="fee.status"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                     <!-- Contact Details -->
+                                <div style="flex: 1; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+                                    <h2>Contact Details</h2>
+                                    <p><strong>School Name:</strong> Aditya Educational Institutions</p>
+                                    <p><strong>Address:</strong> 123 School Street, Education City</p>
+                                    <p><strong>Phone:</strong>9160879413</p>
+                                    <p><strong>Email:</strong> admin@aditya.edu.in</p>
+                                    <p><strong>Website:</strong> <a href="http://www.aditya.edu.in">www.aditya.edu.in</a></p>
+                                </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

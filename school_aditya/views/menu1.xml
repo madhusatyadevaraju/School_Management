@@ -10,15 +10,15 @@
               name="Student"
               parent="menu_school_root"
               action="action_school_student"
+              groups="group_school_student,group_school_management"
     />
 
      <menuitem id="menu_teacher"
               name="Teacher"
               parent="menu_school_root"
                action="action_school_teacher"
-
-
-    />
+               groups="group_school_teachers"
+     />
 
     <menuitem id="fees_strucutre"
               name="Fees"
@@ -29,11 +29,13 @@
               name="Admission"
               parent="menu_school_root"
               action="action_school_query"
+
      />
     <menuitem id="menu_student-suggestion_list"
               name="Suggestions"
               parent="menu_school_root"
               action="action_school_student_suggestion_list"
+              groups="group_school_management"
 
      />
 </odoo>

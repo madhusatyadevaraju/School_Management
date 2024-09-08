@@ -43,7 +43,7 @@
                     <notebook>
                             <page string="Additional">
                                 <group>
-                                <field name="teacher_user_id" domain="[('name', '=', name)]"/>
+                                <field name="teacher_user_id" domain="[('name', '=', name)]" readonly="1"/>
                                 </group>
                             </page>
                     </notebook>

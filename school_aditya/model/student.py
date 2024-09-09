@@ -76,6 +76,7 @@ class SchoolStudent(models.Model):
         if self.teacher:
             self.consultant_no = self.teacher.mobile
 
+# For creating a Wizard in school.student model
     def action_suggestion(self):
         return {
             'name': _('Suggestion'),
@@ -104,10 +105,3 @@ class SchoolStudent(models.Model):
         print("hello working",mail)
 
 
-    # @api.model
-    # for the use of reporting returns
-    # # def _get_report_values(self, docids, data=None):
-    # #     docs = self.env['school.student'].browse(docids)
-    # #     return {
-    # #         'docs': docs,
-    # #     }

@@ -47,4 +47,16 @@
         <field name="perm_unlink" eval="0"/><!-- Changed 'groups' to 'groups_id' -->
     </record>
 
+       <!-- Record rule for teachers viewing their own records -->
+    <record id="school_management_records_rule" model="ir.rule">
+        <field name="name">Management</field>
+        <field name="model_id" ref="model_school_student_suggestion"/> <!-- Use the actual ID of the model -->
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('group_school_management'))]"/>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/><!-- Changed 'groups' to 'groups_id' -->
+    </record>
+
 </odoo>

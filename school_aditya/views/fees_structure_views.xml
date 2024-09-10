@@ -5,14 +5,16 @@
         <field name="name">fees.structure.tree</field>
         <field name="model">fees.structure</field>
         <field name="arch" type="xml">
-            <tree string="fees_structure">
+            <tree string="fees_structure" editable="bottom">
 
                 <field name="student_id"/>
                 <field name="fee_type"/>
                 <field name="fees_amount"/>
                 <field name="due_date"/>
+                 <field name="tax" widget="many2many_tags"/>
+                <field name="tax_amount"/>
+                <field name="total_amount"/>
                 <field name="status"/>
-
             </tree>
         </field>
     </record>
@@ -30,9 +32,13 @@
                 <sheet>
                 <group>
                     <field name="student_id"/>
-                    <field name="fee_type"/>
-                    <field name="fees_amount"/>
-                    <field name="due_date"/>
+                <field name="fee_type"/>
+                <field name="fees_amount"/>
+                <field name="due_date"/>
+                 <field name="tax" widget="many2many_tags"/>
+                <field name="tax_amount"/>
+                <field name="total_amount"/>
+                <field name="status"/>
 
                 </group>
                 </sheet>

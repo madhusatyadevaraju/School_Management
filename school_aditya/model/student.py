@@ -40,6 +40,17 @@ class SchoolStudent(models.Model):
     student_status = fields.Char(string="Status")
     suggestion_count = fields.Integer(string="Suggestion", compute='_suggestion_count')
 
+    total_amount = fields.Float(string="Total Amount", compute='_compute_total_amount', store=True, readonly=True)
+    untaxed_amount = fields.Float(string="Untaxed Amount", store=True, readonly=True)
+    taxed_amount = fields.Float(string="Total tax Amount", store=True, readonly=True)
+
+    @api.depends('student_fees.total_amount', 'student_fees.fees_amount')
+    def _compute_total_amount(self):
+        for rec in self:
+            rec.total_amount = sum(i.total_amount for i in rec.student_fees)
+            rec.untaxed_amount = sum(j.fees_amount for j in rec.student_fees)
+            rec.taxed_amount = rec.total_amount - rec.untaxed_amount
+
     def _suggestion_count(self):
         self.suggestion_count = self.env['school.student.suggestion'].search_count(
             domain=[('student_name', '=', self.name)]
@@ -103,5 +114,10 @@ class SchoolStudent(models.Model):
         template = self.env.ref('school_aditya.email_template_student_guardian')
         mail=template.send_mail(self.id, force_send=True)
         print("hello working",mail)
+
+
+
+
+
 
 

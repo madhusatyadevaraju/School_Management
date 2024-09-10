@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<odoo>
+<!--    Fees due date remainders-->
+     <record id="fees_due_date_remainder" model="ir.cron">
+            <field name="name">Fess Due Date</field>
+            <field name="model_id" ref="model_school_student"/>
+            <field name="state">code</field>
+            <field name="code">model.send_end_date_notifications_cron()</field> <!--And this function should do in srudent.py-->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+</odoo>

@@ -11,26 +11,26 @@
             <field name="description">Send to Students</field>
             <field name="body_html">
                 <![CDATA[
-                    <p>Dear ${object.gaurdien_name},</p>
+                    <p>Dear <t t-out="object.name">,</p>
 
-                <p>We hope this email finds you well. Below are the details for the student ${object.name}:</p>
+                <p>We hope this email finds you well. Below are the details for the student <t t-out="object.name">:</p>
 
                 <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
                     <tr>
                         <td><strong>Name:</strong></td>
-                        <td>${object.name}</td>
+                        <td><t t-out="object.name"></td>
                     </tr>
                     <tr>
                         <td><strong>Mobile:</strong></td>
-                        <td>${object.mobile}</td>
+                       <td><t t-out="object.mobile"></td>
                     </tr>
                     <tr>
                         <td><strong>Address:</strong></td>
-                        <td>${object.address}</td>
+                        <td><t t-out="object.address"></td>
                     </tr>
                     <tr>
                         <td><strong>Guardian Name:</strong></td>
-                        <td>${object.gaurdian_name}</td>
+                        <td><t t-out="object.gaurdien_name"></td>
                     </tr>
 
                 </table>

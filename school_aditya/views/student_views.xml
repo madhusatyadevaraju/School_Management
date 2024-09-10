@@ -74,6 +74,11 @@
                             </page>
                         </notebook>
                     </group>
+                      <group style="text-align: right; margin-left: 1080px;">
+                        <field name="untaxed_amount"/>
+                        <field name="taxed_amount"/>
+                          <field name="total_amount"/>
+                    </group>
                 </sheet>
 
                 <div class="oe_chatter">

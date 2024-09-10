@@ -8,6 +8,8 @@
         "security/ir.model.access.csv",
         "security/security.xml",
         "data/email_templets_views.xml",
+        "data/remainder_student_cron.xml",
+        "data/fee_due_remainder_email_templete.xml",
         "report/student_model_report.xml",
         "report/student_model_report_templete.xml",
         "views/student_views.xml",

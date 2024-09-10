@@ -12,8 +12,7 @@
             <field name="body_html">
                 <![CDATA[
                     <p>Dear <t t-out="object.name">,</p>
-
-                <p>We hope this email finds you well. Below are the details for the student <t t-out="object.name">:</p>
+                    <p>We hope this email finds you well. Below are the details for the student <t t-out="object.name">:</p>
 
                 <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">
                     <tr>

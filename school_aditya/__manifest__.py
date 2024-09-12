@@ -20,8 +20,7 @@
         "views/invoicing_view.xml",
         "wizard/student_suggestion_wizard_views.xml",
          "views/student_suggestion_list_views.xml",
-
-        "views/menu1.xml"
-
-    ]
+         "views/product_brand_in_product_template_views.xml",
+         "views/menu1.xml",
+    ],
 }

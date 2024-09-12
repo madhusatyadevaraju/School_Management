@@ -43,6 +43,7 @@ class FeesStructure(models.Model):
             # Example: Creating an invoice (dummy logic, adjust according to your needs)
             invoice = self.env['account.move'].create({
                     'partner_id': self.student_id.user_id.partner_id.id,  # Assuming you have a partner_id in school.student model
+                    'parent_name':self.student_id.gaurdien_name,
                     'move_type': 'out_invoice',
                     'invoice_date': fields.Date.today(),
                     'invoice_line_ids': [(0, 0, {

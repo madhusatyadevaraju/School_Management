@@ -5,3 +5,4 @@ access_fees_structure,access_fees_structure,model_fees_structure,,1,1,1,1
 access_school_query,access_school_query,model_school_query,,1,1,1,1
 access_student_suggestion,access_student_suggestion,model_student_suggestion,,1,1,1,1
 access_school_student_suggestion,access_school_student_suggestion,model_school_student_suggestion,,1,1,1,1
+access_product_brand,access_product_brand,model_product_brand,,1,1,1,1

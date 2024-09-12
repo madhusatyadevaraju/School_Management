@@ -1,0 +1,4 @@
+.thick_bold_readonly {
+    font-weight: bold !important;   /* Make the text bold */
+    color: #000000 !important;      /* Change the color to black (or any other dark color) */
+}

@@ -39,6 +39,9 @@
                         string="Suggestion">
                         <field name="suggestion_count" widget="statinfo"/>
                         </button><!-- Pass the default value from the student record -->
+<!--                    creating a smart button for the invoices-->
+                    <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-money" string="Invoices">
+                    <field name="invoice_count" widget="statinfo"/></button>
                     </div>
                     <group>
                         <group>

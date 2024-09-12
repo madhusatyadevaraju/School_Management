@@ -42,6 +42,7 @@ class SchoolStudent(models.Model):
     )
     student_status = fields.Char(string="Status")
     suggestion_count = fields.Integer(string="Suggestion", compute='_suggestion_count')
+    invoice_count = fields.Integer(string='Invoices', compute='_compute_invoice_count')
 
     total_amount = fields.Float(string="Total Amount", compute='_compute_total_amount', store=True, readonly=True)
     untaxed_amount = fields.Float(string="Untaxed Amount", store=True, readonly=True)
@@ -59,6 +60,22 @@ class SchoolStudent(models.Model):
         self.suggestion_count = self.env['school.student.suggestion'].search_count(
             domain=[('student_name', '=', self.name)]
         )
+    # Compute the invoices and return the inovices
+
+
+    def _compute_invoice_count(self):
+        for student in self:
+            student.invoice_count = self.env['account.move'].search_count(domain=[('partner_id', '=', student.name), ('move_type', '=', 'out_invoice')])
+
+    def action_view_invoices(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Invoices',
+            'res_model': 'account.move',
+            'view_mode': 'tree,form',
+            'domain': [('partner_id', '=', self.user_id.partner_id.id), ('move_type', '=', 'out_invoice')],
+            'context': dict(self.env.context),
+        }
 
     @api.depends('date_of_birth')
     def _compute_age(self):

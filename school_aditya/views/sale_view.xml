@@ -5,17 +5,23 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
+<!--                To add customer note on this field-->
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="customer_note"/>
                 </xpath>
+<!--                In other info we have to add Banking details-->
                <xpath expr="//page[@name='other_information']" position="inside">
-                <group>
+                <group namre="bank_account_details" string="BANK ACCOUNT DETAILS">
                     <field name="bank_name"/>
                     <field name="ifsc_code"/>
                     <field name="account_number"/>
                     <field name="branch"/>
                 </group>
             </xpath>
+                 <xpath expr="//tree//field[@name='price_unit']" position="after">
+                    <field name="brand_ids"/>
+                </xpath>
+
             </field>
     </record>
 

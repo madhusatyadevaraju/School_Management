@@ -5,6 +5,8 @@ from lib2to3.fixes.fix_input import context
 from odoo import api, fields, models, _
 from datetime import datetime
 
+from odoo.exceptions import UserError
+
 
 class SchoolStudent(models.Model):
     _name = "school.student"
@@ -44,6 +46,7 @@ class SchoolStudent(models.Model):
     total_amount = fields.Float(string="Total Amount", compute='_compute_total_amount', store=True, readonly=True)
     untaxed_amount = fields.Float(string="Untaxed Amount", store=True, readonly=True)
     taxed_amount = fields.Float(string="Total tax Amount", store=True, readonly=True)
+    # partner_id = fields.Many2one('res.partner', string='Partner')
 
     @api.depends('student_fees.total_amount', 'student_fees.fees_amount')
     def _compute_total_amount(self):
@@ -122,39 +125,8 @@ class SchoolStudent(models.Model):
         today = datetime.today().date()
         due_students = self.search([('student_fees.due_date', '=', today)])
         for student in due_students:
-            # report_action = self.env.ref('school_aditya.report_school_student_management')
-            #
-            # if not report_action:
-            #     raise ValueError("Report action not found")
-            #
-            # # Generate the PDF
-            # pdf_content, _ = self.env['report'].get_pdf([student.id], report_action.report_file)
-            #
-            # # Create an attachment dictionary
-            # pdf_attachment = {
-            #     'name': 'fees_structure_report.pdf',
-            #     'type': 'binary',
-            #     'datas': base64.b64encode(pdf_content),
-            #     'datas_fname': 'fees_structure_report.pdf',
-            #     'mimetype': 'application/pdf',
-            # }
             message = f"Fees for the student with ID {student.id} are due today!"
             student.message_post(body=message)
-
-            # # Prepare the email template
-            # template = self.env.ref('school_aditya.student_due_date_reminder_email_template')
-            # mail_values = {
-            #     'subject': 'Reminder: Fees Due Today',
-            #     'body_html': template.body_html,
-            #     'email_from': template.email_from,
-            #     'email_to': student.email,
-            #     'attachment_ids': [(0, 0, pdf_attachment)],
-            # }
-            # # Send the email with the attachment
-            # mail = self.env['mail.mail'].create(mail_values)
-            # mail.send()
-            # print("Notification sent and report attached", mail)
-
             template = self.env.ref('school_aditya.student_due_date_reminder_email_template')
             mail = template.send_mail(student.id, force_send=True)
             print("hello working", mail)

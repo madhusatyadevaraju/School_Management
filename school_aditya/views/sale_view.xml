@@ -8,6 +8,14 @@
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="customer_note"/>
                 </xpath>
+               <xpath expr="//page[@name='other_information']" position="inside">
+                <group>
+                    <field name="bank_name"/>
+                    <field name="ifsc_code"/>
+                    <field name="account_number"/>
+                    <field name="branch"/>
+                </group>
+            </xpath>
             </field>
     </record>
 

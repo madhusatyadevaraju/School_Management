@@ -1,59 +1,154 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
         <template id="report_school_student_management">
             <t t-call="web.html_container">
                 <t t-call="web.external_layout">
-                    <t t-foreach="docs" t-as="doc">
-                        <div class="page">
-                            <h1 style="color:red"><i>Student Details</i></h1>
-                            <p>Student Name:<span t-field="doc.name" style="margin-left: 10px;"/></p>
-                            <p>Student Mobile:<span t-field="doc.mobile" style="margin-left: 10px;"/></p>
-                            <p>Parent Name:<span t-field="doc.gaurdien_name" style="margin-left: 10px;"/></p>
-                        </div>
-                    </t>
-                    <div style="margin-bottom:80px;"/>
-                    <!-- Displaying Fees Structure -->
-                    <div style="margin-bottom:80px;">
-                        <h2>Student Fees Details</h2>
-                        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th style="border: 1px solid black; padding: 8px;">Fee Type</th>
-                                    <th style="border: 1px solid black; padding: 8px;">Amount</th>
-                                    <th style="border: 1px solid black; padding: 8px;">Due Date</th>
-                                    <th style="border: 1px solid black; padding: 8px;">Tax</th>
-                                    <th style="border: 1px solid black; padding: 8px;">Total Tax</th>
-                                    <th style="border: 1px solid black; padding: 8px;">Total Amount</th>
-                                    <th style="border: 1px solid black; padding: 8px;">Fee Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <t t-foreach="doc.student_fees" t-as="fee">
-                                    <tr>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-esc="fee.fee_type"/></td>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-esc="fee.fees_amount"/></td>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-esc="fee.due_date"/></td>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-field="fee.tax"/></td>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-esc="fee.tax_amount"/></td>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-esc="fee.total_amount"/></td>
-                                        <td style="border: 1px solid black; padding: 8px;"><span t-esc="fee.status"/></td>
-                                    </tr>
-                                </t>
-                            </tbody>
-                        </table>
+                    <!-- Styling for modern and professional look -->
+                    <style>
+                        body {
+                            font-family: 'Lato', sans-serif;
+                            color: #333;
+                        }
+                        h1, h2 {
+                            font-family: 'Montserrat', sans-serif;
+                            color: #34495e;
+                            margin-bottom: 20px;
+                            text-align: center;
+                        }
+                        .page-title {
+                            font-size: 28px;
+                            font-weight: 600;
+                        }
+                        .section-title {
+                            font-size: 22px;
+                            color: #2c3e50;
+                            margin-bottom: 15px;
+                            border-bottom: 2px solid #2980b9;
+                            padding-bottom: 5px;
+                        }
+                        .content-section {
+                            font-size: 16px;
+                            margin: 20px;
+                            line-height: 1.6;
+                        }
+                        .info-group {
+                            margin-bottom: 15px;
+                        }
+                        .info-group strong {
+                            display: inline-block;
+                            width: 150px;
+                        }
+                        .table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-top: 20px;
+                        }
+                        .table th {
+                            background-color: #2980b9;
+                            color: #fff;
+                            font-weight: 500;
+                            padding: 12px;
+                            text-align: left;
+                        }
+                        .table td {
+                            padding: 12px;
+                            border-bottom: 1px solid #ddd;
+                        }
+                        .table tr:nth-child(even) {
+                            background-color: #f9f9f9;
+                        }
+                        .summary {
+                            margin-top: 40px;
+                            text-align: right;
+                            font-size: 16px;
+                            font-weight: 600;
+                        }
+                        .summary strong {
+                            color: #2980b9;
+                        }
+                        .logo {
+                            text-align: right;
+                            margin-bottom: 40px;
+                        }
+                        .logo img {
+                            max-width: 150px;
+                        }
+                    </style>
+
+                    <!-- Company/School Logo (optional) -->
+                    <div class="logo">
+                        <img src="/path/to/logo.png" alt="School Logo"/>
                     </div>
 
-                  <div>
-                      <group style="text-align : right; margin-left:1080px;">
-                            <p> Untaxed Amount: <strong><span t-field="doc.untaxed_amount"/></strong></p>
-                            <p> Tax Amount: <strong><span t-field="doc.taxed_amount"/></strong></p>
-                            <p> Total Amount: <strong><span t-field="doc.total_amount"/></strong></p>
-                      </group>
-                  </div>
+                    <!-- Student Details Section -->
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <h1 class="page-title">Student Details</h1>
+                            <div class="content-section">
+                                <div class="info-group">
+                                    <strong>Student Name:</strong>
+                                    <span t-field="doc.name"/>
+                                </div>
+                                <div class="info-group">
+                                    <strong>Student Mobile:</strong>
+                                    <span t-field="doc.mobile"/>
+                                </div>
+                                <div class="info-group">
+                                    <strong>Parent Name:</strong>
+                                    <span t-field="doc.gaurdien_name"/>
+                                </div>
+                                <div class="info-group">
+                                    <strong>Mobile No:</strong>
+                                    <span t-field="doc.mobile"/>
+                                </div>
+                                <div class="info-group">
+                                    <strong>Address:</strong>
+                                    <span t-field="doc.address"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student Fees Section -->
+                        <div class="page">
+                            <h2 class="section-title">Student Fees Details</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Fee Type</th>
+                                        <th>Amount</th>
+                                        <th>Due Date</th>
+                                        <th>Tax</th>
+                                        <th>Total Tax</th>
+                                        <th>Total Amount</th>
+                                        <th>Fee Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="doc.student_fees" t-as="fee">
+                                        <tr>
+                                            <td><span t-esc="fee.fee_type"/></td>
+                                            <td><span t-esc="fee.fees_amount"/></td>
+                                            <td><span t-esc="fee.due_date"/></td>
+                                            <td><span t-field="fee.tax"/></td>
+                                            <td><span t-esc="fee.tax_amount"/></td>
+                                            <td><span t-esc="fee.total_amount"/></td>
+                                            <td><span t-esc="fee.status"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Summary Section -->
+                        <div class="summary">
+                            <p>Untaxed Amount: <strong><span t-field="doc.untaxed_amount"/></strong></p>
+                            <p>Tax Amount: <strong><span t-field="doc.taxed_amount"/></strong></p>
+                            <p>Total Amount: <strong><span t-field="doc.total_amount"/></strong></p>
+                        </div>
+                    </t>
                 </t>
             </t>
-
         </template>
     </data>
 </odoo>

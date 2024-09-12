@@ -16,6 +16,7 @@
                 <field name="teacher"/>
                 <field name="student_fees"/>
                 <field name="student_status"/>
+<!--                <field name="partner_id"/>-->
             </tree>
         </field>
     </record>
@@ -26,12 +27,10 @@
         <field name="arch" type="xml">
             <form string="student">
                 <header>
-
                     <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state!='not selected'"/>
                      <button name="action_suggestion" string="Suggestion" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
-
-                <button name="action_send_email" type="object" string="Send Email" class="oe_highlight"/>
+                    <button name="action_send_email" type="object" string="Send Email" class="oe_highlight"/>
 
                 </header>
                 <sheet>  <!-- sheet is used to arrange all fields in one box-->
@@ -40,7 +39,6 @@
                         string="Suggestion">
                         <field name="suggestion_count" widget="statinfo"/>
                         </button><!-- Pass the default value from the student record -->
-
                     </div>
                     <group>
                         <group>
@@ -58,14 +56,37 @@
                             <field name="joining_of_date" optional="hide"/>
                             <field name="teacher"/>
                             <field name="teacher_ids" widget="many2many_tags"/>
+<!--                            <field name="partner_id"/>-->
                         </group>
                         <notebook>
                             <page string="Fees Structure">
                                 <field name="student_fees">
+                                    <tree editable="bottom">
+<!--                                        <field name="student_id"/>-->
+                                        <field name="fee_type"/>
+                                        <field name="product_id"/>
+                                        <field name="fees_amount"/>
+                                        <field name="due_date"/>
+                                        <field name="tax" widget="many2many_tags"/>
+                                        <field name="tax_amount"/>
+                                        <field name="total_amount"/>
+                                        <button name="action_payment" type="object" string="Payment" class="oe_highlight"/>
+                                        <field name="status"/>
+
+                                    </tree>
+                                    <form>
+<!--                                        <field name="student_id"/>-->
+                                        <field name="fee_type"/>
+                                        <field name="fees_amount"/>
+                                        <field name="due_date"/>
+                                        <field name="tax" widget="many2many_tags"/>
+                                        <field name="tax_amount"/>
+                                        <field name="total_amount"/>
+                                        <field name="status"/>
+                                    </form>
                                 </field>
                             </page>
                              <page string="Additional Fields">
-
                                  <group>
                                 <field name="consultant_no"/>
                                       <field name="student_status"/>

@@ -1,9 +1,10 @@
-from odoo import api, fields, models
+from odoo import api, fields, models,_
+
 
 
 class FeesStructure(models.Model):
     _name = 'fees.structure'
-    _rec_name = "fees_amount"
+    _rec_name = "fee_type"
 
 
     fees_amount = fields.Float(string='Fees Amount')
@@ -14,6 +15,7 @@ class FeesStructure(models.Model):
     tax = fields.Many2many('account.tax', string="Tax")
     tax_amount = fields.Float(string='Tax Amount', compute='_compute_tax_amount', default=0.0, store=True)
     total_amount = fields.Float(string='Total', compute='_compute_total_amount', store=True)
+    product_id=fields.Many2one('product.template',string="Product")
 
     def action_confirm(self):
         for rec in self:
@@ -35,3 +37,34 @@ class FeesStructure(models.Model):
         for rec in self:
             rec.total_amount = rec.fees_amount + rec.tax_amount
 
+    def action_payment(self):
+            print(self,"Button clicked")
+            self.ensure_one()
+            # Example: Creating an invoice (dummy logic, adjust according to your needs)
+            invoice = self.env['account.move'].create({
+                    'partner_id': self.student_id.user_id.partner_id.id,  # Assuming you have a partner_id in school.student model
+                    'move_type': 'out_invoice',
+                    'invoice_date': fields.Date.today(),
+                    'invoice_line_ids': [(0, 0, {
+                        'product_id':self.product_id.id,
+                        'fees_id': self.id,
+                        'name': 'Fee for %s' % self.fee_type,
+                        'quantity': 1,
+                        'price_unit': self.total_amount,
+                        'tax_ids': [(6, 0, self.tax.ids)],
+                    })],
+                })
+
+
+            # Mark the fee as paid
+            self.status = 'paid'
+
+            # Optionally, open the created invoice
+            return {
+                'type': 'ir.actions.act_window',
+                'name': _('Invoice'),
+                'res_model': 'account.move',
+                'res_id': invoice.id,
+                'view_mode': 'form',
+                'target': 'current',
+                }

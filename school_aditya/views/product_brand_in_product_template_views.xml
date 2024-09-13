@@ -9,7 +9,6 @@
                 <xpath expr="//notebook//field[@name='categ_id']" position="after">
                     <field name="brand_ids"/>
                 </xpath>
-
 </field>
 </record>
 

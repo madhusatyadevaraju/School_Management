@@ -12,6 +12,8 @@
         "data/fee_due_remainder_email_templete.xml",
         "report/student_model_report.xml",
         "report/student_model_report_templete.xml",
+        "report/sale_report.xml",
+        "report/sale_report_template.xml",
         "views/student_views.xml",
         "views/teacher.xml",
         "views/fees_structure_views.xml",

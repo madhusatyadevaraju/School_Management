@@ -10,6 +10,14 @@
                     <field name="parent_name" string="Parent Name"/>
                     <field name="parent_mobile" string="Parent No"/>
             </xpath>
+               <xpath expr="//page[@name='other_info']//group[@name='accounting_info_group']" position="after">
+                     <group name="bank_account_details" string="BANK ACCOUNT DETAILS">
+                    <field name="bank_name"/>
+                    <field name="ifsc_code"/>
+                    <field name="account_number"/>
+                    <field name="branch"/>
+                </group>
+               </xpath>
         </field>
     </record>
 

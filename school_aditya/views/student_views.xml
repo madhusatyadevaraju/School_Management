@@ -114,6 +114,30 @@
         </field>
     </record>
 
+     <!--creating a search view-->
+      <!-- Search View -->
+    <record id="view_school_student_search" model="ir.ui.view">
+        <field name="name">school.student.search</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <search string="student_tree">
+<!--                search the records with help of names-->
+                <field name="name"/>
+                <field name="mobile"/>
+                <field name="gender"/>
+<!--                Filter the records based on the condition-->
+                <filter string="Male" name="male_students" domain="[('gender', '=', 'male')]"/>
+<!--                <separator/> If a gender has both female and male-->
+                <filter string="Female" name="female_students" domain="[('gender', '=', 'female')]"/>
+                <group expand="1" string="Group By">
+<!--                    group by gender-->
+                        <filter name="group_by_gender" string="Gender" context="{'group_by' : 'gender'}"/>
+                       <filter name="group_by_name" string="Student Name" context="{'group_by' : 'name'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
 
     <record id="action_school_student" model="ir.actions.act_window">
         <field name="name">students</field>

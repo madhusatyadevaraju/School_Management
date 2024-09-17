@@ -11,7 +11,7 @@
                 </xpath>
 <!--                In other info we have to add Banking details-->
                <xpath expr="//page[@name='other_information']" position="inside">
-                <group namre="bank_account_details" string="BANK ACCOUNT DETAILS">
+                <group name="bank_account_details" string="BANK ACCOUNT DETAILS">
                     <field name="bank_name"/>
                     <field name="ifsc_code"/>
                     <field name="account_number"/>

@@ -14,6 +14,7 @@
         "report/student_model_report_templete.xml",
         "report/sale_report.xml",
         "report/sale_report_template.xml",
+        "report/invoicing_inherit_report_template.xml",
         "views/student_views.xml",
         "views/teacher.xml",
         "views/fees_structure_views.xml",

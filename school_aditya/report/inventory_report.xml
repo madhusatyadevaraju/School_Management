@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    To create a Paper report -->
+    <record id="paperformat_inventory" model="report.paperformat">
+        <field name="name">Inventory Paper Format</field>
+        <field name="default">True</field>
+        <!--        <field name="format">custom</field>-->
+        <!--        <field name="page_width">210</field>-->
+        <!--        <field name="page_height">297</field>-->
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_height">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_spacing">10</field> <!-- 10 mm of space between the header and content -->
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="inventory_delivery_order_report" model="ir.actions.report">
+        <field name="name">Delivery Order Report</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">school_aditya.stock_picking_report_template</field>
+        <field name="report_file">school_aditya.stock_picking_report_template</field>
+        <field name="print_report_name">
+            (object.state == 'draft') and ('Draft - ' + object.name) or (object.state == 'done' and 'Done - ' +
+            object.name)
+        </field>
+        <field name="binding_model_id" ref="model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="school_aditya.paperformat_inventory"/>
+    </record>
+</odoo>

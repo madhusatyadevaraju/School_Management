@@ -4,43 +4,45 @@
 
         <template id="report_delivery_header_footer">
             <div class="header">
-<!--                style="background-color:#f6f6f6;-->
-                <div class="text-center">
-                   <t t-foreach="docs" t-as="doc">
-                       <div><img t-attf-src="/web/image/res.company/{{doc.company_id.id}}/logo" style="max-height:80px;"/></div>
-                   </t>
-                </div>
-            </div>
+                <img src="/school_aditya/static/src/image/header-image.jpg" style="width:100%; max-height= 80px; left:0; top:0; position:absolute;"/>
+            </div><br/>
+
             <div class="article o_report_layout_standard">
                 <t t-out="0"/>
             </div>
-             <div class="footer o_standard_footer" style="border-top:1px solid black; background-color:#f6f6f6;">
-                <div class="container">
+<!--            footer section-->
+             <div class="footer o_standard_footer">
+                 <div style="position:fixed; width:100%;">
+                     <img src="/school_aditya/static/src/image/crm_footer.jpg" style="width:100%;"/>
+                 </div>
+                 <div style="position:absolute; width:80%;"><br/><br/><br/>
+                  <t t-foreach="docs" t-as="doc">
+                <div class="container" style="margin-left:20px;">
                    <h5 style="text-align:left;"><span t-field="doc.company_id.street"/></h5>
                    <div class="row" style="color:#415079">
-                       <div class="col-5"><h5><span t-field="doc.company_id.mobile"/></h5></div>
+                       <div class="col-4"><h5><span t-field="doc.company_id.mobile"/></h5></div>
                         <div class="col-4"><h5><span t-field="doc.company_id.email"/></h5></div>
-                        <div class="col-3"><h5><span t-field="doc.company_id.website"/></h5></div>
+                        <div class="col-4"><h5><span t-field="doc.company_id.website"/></h5></div>
                    </div>
-<!--                       <h5 style="text-align:left;"><span t-field="doc.company_id.mobile"/></h5>-->
-<!--                    <h5 style="text-align:center;"><span t-field="doc.company_id.email"/></h5>-->
-<!--                    <h5 style="text-align:right;"><span t-field="doc.company_id.website"/></h5></p>-->
                 </div>
+                  </t>
                  <p style="text-align: center; font-size: 16px; margin-top: 10px;">
                      Page <span class="page"/> /<span class="topage"/></p>
+                 </div>
             </div>
         </template>
         <template id="stock_picking_report_template">
             <t t-call="web.html_container">
                 <t t-call="school_aditya.report_delivery_header_footer"> <!-- Use the customized external layout -->
                 <!--  main section-->
+                 <div style="margin-left:20px; margin-right:20px;">
                  <t t-foreach="docs" t-as="o">
                      <!-- Quotation Title and Number -->
-                      <div class="text-center" style="padding-top:40px; font-weight:bold;"><h2 style="color:#227C7C;"><span t-field="o.company_id.name"/></h2>
-                      </div>
+<!--                      <div class="text-center" style="padding-top:40px; font-weight:bold;"><h2 style="color:#227C7C;"><span t-field="o.company_id.name"/></h2>-->
+<!--                      </div>-->
 
                         <div style="text-align: right;">
-                            <h1 style="font-family: 'Courier New', Courier, monospace;font-size: 24px; font-weight: bold; color: #0E4444; padding-top:30px;">
+                            <h1 style="font-family: 'Courier New', Courier, monospace;font-size: 24px; font-weight: bold; color: #0E4444; padding-top:230px;">
                                 DELIVERY ORDER
                             </h1>
                             <span style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: bold; color:#2B3C56;">
@@ -151,11 +153,12 @@
                             </td>
                         </tr>
                     </table>
+                 </div>
                     <!-- Page break after the table -->
                     <div style="page-break-after: always;"></div>
 
                     <!-- Content on the new page -->
-                    <div style="padding-top:40px;">
+                    <div style="padding-top:230px;">
                         <h4 style="text-align:center; font-weight:bold; font-family: 'Montserrat', sans-serif;">GENERAL
                             TERMS AND CONDITIONS
                         </h4>

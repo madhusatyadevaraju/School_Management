@@ -1,5 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
+<!--    Creating a kanban view-->
+    <record id="view_school_student_kanban" model="ir.ui.view">
+        <field name="name">school.student.kanban</field>
+        <field name="model">school.student</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="address"/>
+                <field name="gaurdien_name"/>
+                <field name="mobile"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="student_img"/>
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="o_kanban_image d-none d-md-block"
+                                 t-attf-style="background-image:url('#{kanban_image('school.student','student_img',record.id.raw_value,placeholder)}')">
+                            </div>
+                            <div class="oe_kanban_details">
+                            <ul style="font-size:15px;">
+                                <li style="font-size:20px;"><strong><field name="name"/></strong></li>
+                                <li>Guardian: <field name="gaurdien_name"/></li>
+                                <li>Mobile: <field name="mobile"/></li>
+                                <li>Gender: <field name="gender"/></li>
+                                <li>Age: <field name="age"/></li>
+                                <li><field name="state"/></li>
+                                <li>Invoices: <field name="invoice_count"/></li>
+                            </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
     <!--creating a tree view-->
     <record id="view_school_student_tree" model="ir.ui.view">
         <field name="name">school.student.tree</field>
@@ -16,7 +54,6 @@
                 <field name="teacher"/>
                 <field name="student_fees"/>
                 <field name="student_status"/>
-<!--                <field name="partner_id"/>-->
             </tree>
         </field>
     </record>
@@ -27,22 +64,28 @@
         <field name="arch" type="xml">
             <form string="student">
                 <header>
-                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state!='not selected'"/>
-                     <button name="action_suggestion" string="Suggestion" type="object" class="oe_highlight"/>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"
+                            invisible="state!='not selected'"/>
+                    <button name="action_suggestion" string="Suggestion" type="object" class="oe_highlight"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                     <button name="action_send_email" type="object" string="Send Email" class="oe_highlight"/>
 
                 </header>
                 <sheet>  <!-- sheet is used to arrange all fields in one box-->
                     <div class="oe_button_box" name="button_box">
-                        <button name="action_open_suggestion_wizard" type="object" class="oe_stat_button" icon="fa-calendar"
-                        string="Suggestion">
-                        <field name="suggestion_count" widget="statinfo"/>
+                        <button name="action_open_suggestion_wizard" type="object" class="oe_stat_button"
+                                icon="fa-calendar"
+                                string="Suggestion">
+                            <field name="suggestion_count" widget="statinfo"/>
                         </button><!-- Pass the default value from the student record -->
-<!--                    creating a smart button for the invoices-->
-                    <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-money" string="Invoices">
-                    <field name="invoice_count" widget="statinfo"/></button>
+                        <!--                    creating a smart button for the invoices-->
+                        <button name="action_view_invoices" type="object" class="oe_stat_button" icon="fa-money"
+                                string="Invoices">
+                            <field name="invoice_count" widget="statinfo"/>
+                        </button>
                     </div>
+                            <field name="student_img" class="oe_avatar" widget="image"/>
+
                     <group>
                         <group>
                             <field name="name"/>
@@ -59,13 +102,13 @@
                             <field name="joining_of_date" optional="hide"/>
                             <field name="teacher"/>
                             <field name="teacher_ids" widget="many2many_tags"/>
-<!--                            <field name="partner_id"/>-->
+                            <!--                            <field name="partner_id"/>-->
                         </group>
                         <notebook>
                             <page string="Fees Structure">
                                 <field name="student_fees">
                                     <tree editable="bottom">
-<!--                                        <field name="student_id"/>-->
+                                        <!--                                        <field name="student_id"/>-->
                                         <field name="fee_type"/>
                                         <field name="product_id"/>
                                         <field name="fees_amount"/>
@@ -73,12 +116,13 @@
                                         <field name="tax" widget="many2many_tags"/>
                                         <field name="tax_amount"/>
                                         <field name="total_amount"/>
-                                        <button name="action_payment" type="object" string="Payment" class="oe_highlight"/>
+                                        <button name="action_payment" type="object" string="Payment"
+                                                class="oe_highlight"/>
                                         <field name="status"/>
 
                                     </tree>
                                     <form>
-<!--                                        <field name="student_id"/>-->
+                                        <!--                                        <field name="student_id"/>-->
                                         <field name="fee_type"/>
                                         <field name="fees_amount"/>
                                         <field name="due_date"/>
@@ -89,54 +133,55 @@
                                     </form>
                                 </field>
                             </page>
-                             <page string="Additional Fields">
-                                 <group>
-                                <field name="consultant_no"/>
-                                      <field name="student_status"/>
-                                     <field name="user_id" domain="[('name', '=', name)]" readonly="1"/>
-                                 </group>
+                            <page string="Additional Fields">
+                                <group>
+                                    <field name="consultant_no"/>
+                                    <field name="student_status"/>
+                                    <field name="user_id" domain="[('name', '=', name)]" readonly="1"/>
+                                </group>
                             </page>
                         </notebook>
                     </group>
-                      <group style="text-align: right; margin-left: 1080px;">
+                    <group style="text-align: right; margin-left: 1080px;">
                         <field name="untaxed_amount"/>
                         <field name="taxed_amount"/>
-                          <field name="total_amount"/>
+                        <field name="total_amount"/>
                     </group>
                 </sheet>
 
                 <div class="oe_chatter">
-                        <field name="message_follower_ids" groups="base.group_user" options="{'post_refresh': 'recipients'}"/>
-                        <field name="message_ids"/>
-                    </div>
+                    <field name="message_follower_ids" groups="base.group_user"
+                           options="{'post_refresh': 'recipients'}"/>
+                    <field name="message_ids"/>
+                </div>
 
             </form>
         </field>
     </record>
 
-     <!--creating a search view-->
-      <!-- Search View -->
+    <!--creating a search view-->
+    <!-- Search View -->
     <record id="view_school_student_search" model="ir.ui.view">
         <field name="name">school.student.search</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
             <search string="student_tree">
-<!--                search the records with help of names-->
+                <!--                search the records with help of names-->
                 <field name="name"/>
                 <field name="mobile"/>
                 <field name="gender"/>
-<!--                Filter the records based on the condition-->
+                <!--                Filter the records based on the condition-->
                 <filter string="Male" name="male_students" domain="[('gender', '=', 'male')]"/>
-<!--                <separator/> If a gender has both female and male-->
+                <!--                <separator/> If a gender has both female and male-->
                 <filter string="Female" name="female_students" domain="[('gender', '=', 'female')]"/>
                 <group expand="1" string="Group By">
-<!--                    group by gender-->
-                        <filter name="group_by_gender" string="Gender" context="{'group_by' : 'gender'}"/>
-                       <filter name="group_by_name" string="Student Name" context="{'group_by' : 'name'}"/>
+                    <!--                    group by gender-->
+                    <filter name="group_by_gender" string="Gender" context="{'group_by' : 'gender'}"/>
+                    <filter name="group_by_name" string="Student Name" context="{'group_by' : 'name'}"/>
                 </group>
-                 <searchpanel>
-                        <field name="gender" string="Gender" enable_counters="1"/>
-                    </searchpanel>
+                <searchpanel>
+                    <field name="gender" string="Gender" enable_counters="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
@@ -145,9 +190,9 @@
     <record id="action_school_student" model="ir.actions.act_window">
         <field name="name">students</field>
         <field name="res_model">school.student</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="search_view_id" ref="view_school_student_search"/>
-<!--        Add a default search in search bar in this male_students is the name of the filter-->
+        <!--        Add a default search in search bar in this male_students is the name of the filter-->
         <field name="context">{'search_default_male_students': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

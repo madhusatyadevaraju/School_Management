@@ -49,6 +49,8 @@ class SchoolStudent(models.Model):
     taxed_amount = fields.Float(string="Total tax Amount", store=True, readonly=True)
     # partner_id = fields.Many2one('res.partner', string='Partner')
 
+    student_img=fields.Image(string="Student Image")
+
     @api.depends('student_fees.total_amount', 'student_fees.fees_amount')
     def _compute_total_amount(self):
         for rec in self:

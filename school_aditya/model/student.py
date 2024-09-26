@@ -10,10 +10,12 @@ from odoo.exceptions import UserError
 
 class SchoolStudent(models.Model):
     _name = "school.student"
-    _inherit = ["mail.thread"]
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
     _description = "Student Master"
     _rec_name = 'name'
 
+    active = fields.Boolean(default=True)
     name = fields.Char(string="Name", tracking=True, required=True)
     email = fields.Char(string="Email")
     address = fields.Char(string="Address")

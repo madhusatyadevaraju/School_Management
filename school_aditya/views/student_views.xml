@@ -6,7 +6,15 @@
         <field name="name">school.student.kanban</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
-            <kanban>
+            <kanban default_group_by="state"
+                    records_draggable="0"
+                    quick_create="1"
+                    quick_create_view="school_aditya.view_school_student_create_kanban"
+                    on_create="quick_create"
+                    group_create="0"
+                    group_edit="0"
+                    group_delete="0"
+                    archivable="1">
                 <field name="name"/>
                 <field name="address"/>
                 <field name="gaurdien_name"/>
@@ -15,6 +23,8 @@
                 <field name="age"/>
                 <field name="student_img"/>
                 <field name="id"/>
+                <field name="state"/>
+                <progressbar field="state" colors='{"not selected":"danger","selected":"success"}'/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
@@ -23,12 +33,12 @@
                             </div>
                             <div class="oe_kanban_details">
                             <ul style="font-size:15px;">
-                                <li style="font-size:20px;"><strong><field name="name"/></strong></li>
+                                <li style="font-size:20px;"><strong><field name="name"/></strong>
+                                    <span class="badge badge-pill"><field name="state"/></span></li>
                                 <li>Guardian: <field name="gaurdien_name"/></li>
                                 <li>Mobile: <field name="mobile"/></li>
                                 <li>Gender: <field name="gender"/></li>
                                 <li>Age: <field name="age"/></li>
-                                <li><field name="state"/></li>
                                 <li>Invoices: <field name="invoice_count"/></li>
                             </ul>
                             </div>
@@ -38,6 +48,36 @@
             </kanban>
         </field>
     </record>
+<!--    Form view for the kanban view-->
+     <record model="ir.ui.view" id="view_school_student_create_kanban">
+        <field name="name">school.student.form.view.kanban</field>
+        <field name="model">school.student</field>
+          <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name" placeholder="e.g.your name"/>
+                    <field name="email" placeholder="e.g. example@gmail.com"/>
+                <field name="address"/>
+                <field name="gaurdien_name"/>
+                <field name="mobile" placeholder="e.g. 012356789"/>
+                <field name="gender"/>
+                </group>
+            </form>
+          </field>
+    </record>
+
+
+<!--    Pivot view-->
+      <record id="view_school_student_pivot" model="ir.ui.view">
+            <field name="name">school.student.tree</field>
+            <field name="model">school.student</field>
+            <field name="arch" type="xml">
+                <pivot string="student pivot" >
+                    <field name="name" type="row"/>
+                    <field name="total_amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
     <!--creating a tree view-->
     <record id="view_school_student_tree" model="ir.ui.view">
         <field name="name">school.student.tree</field>
@@ -190,7 +230,7 @@
     <record id="action_school_student" model="ir.actions.act_window">
         <field name="name">students</field>
         <field name="res_model">school.student</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
         <field name="search_view_id" ref="view_school_student_search"/>
         <!--        Add a default search in search bar in this male_students is the name of the filter-->
         <field name="context">{'search_default_male_students': 1}</field>

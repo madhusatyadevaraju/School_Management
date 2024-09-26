@@ -1,2 +1,4 @@
-__pycache__/
+/school_aditya/_pycache_/
+/school_aditya/models/_pycache_/
+/school_aditya/wizard/_pycache_/
 *.pyc
